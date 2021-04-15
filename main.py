@@ -106,3 +106,14 @@ for epoch in range(100):
         epoch, np.mean(batch_train_acc), np.mean(batch_train_loss), np.mean(batch_val_acc), np.mean(batch_val_loss)))
 
     model.save('model_{0:04d}.h5'.format(epoch+1))
+
+
+print('receive numbers')
+xs = x_samples[-1].reshape(1, 1, 45)
+ys_pred = model.predict_on_batch(xs)
+list_numbers = []
+
+for n in range(10):
+    numbers = gen_numbers_from_probability(ys_pred[0])
+    print('{0} : {1}'.format(n, numbers))
+    list_numbers.append(numbers)
